@@ -14,18 +14,26 @@ router.get("/", (req, res, next) => UserController.getAllUsers(req, res, next));
 
 // Kullanıcı istatistikleri
 // GET /api/users/stats
-router.get("/stats", (req, res, next) => UserController.getUserStats(req, res, next));
+router.get("/stats", (req, res, next) =>
+  UserController.getUserStats(req, res, next)
+);
 
 // MSISDN ile kullanıcı getir
 // GET /api/users/by-msisdn/:msisdn
-router.get("/by-msisdn/:msisdn", (req, res, next) => UserController.getUserByMsisdn(req, res, next));
+router.get("/by-msisdn/:msisdn", (req, res, next) =>
+  UserController.getUserByMsisdn(req, res, next)
+);
 
 // User ID ile kullanıcı detaylarını getir
 // GET /api/users/:userId
-router.get("/:userId", (req, res, next) => UserController.getUserById(req, res, next));
+router.get("/:userId", (req, res, next) =>
+  UserController.getUserById(req, res, next)
+);
 
 // Kullanıcı profil özeti
 // GET /api/users/:userId/profile
-router.get("/:userId/profile", (req, res, next) => UserController.getUserProfile(req, res, next));
+router.get("/:userId/profile", (req, res, next) =>
+  UserController.getUserProfile(req, res, next)
+);
 
 export default router;

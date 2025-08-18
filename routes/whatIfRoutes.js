@@ -9,9 +9,13 @@ const router = express.Router();
  */
 
 // Ana what-if simülasyon endpoint'i
-router.post("/", (req, res, next) => WhatIfController.calculateWhatIf(req, res, next));
+router.post("/", (req, res, next) =>
+  WhatIfController.calculateWhatIf(req, res, next)
+);
 
 // Senaryo karşılaştırması
-router.post("/compare", (req, res, next) => WhatIfController.compareScenarios(req, res, next));
+router.post("/compare", (req, res, next) =>
+  WhatIfController.compareScenarios(req, res, next)
+);
 
 export default router;
