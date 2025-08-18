@@ -9,12 +9,18 @@ const router = express.Router();
  */
 
 // Ana anomali tespit endpoint'i
-router.post("/", AnomalyController.detectAnomalies);
+router.post("/", (req, res, next) =>
+  AnomalyController.detectAnomalies(req, res, next)
+);
 
 // Detaylı anomali analizi
-router.post("/detailed", AnomalyController.detailedAnalysis);
+router.post("/detailed", (req, res, next) =>
+  AnomalyController.detailedAnalysis(req, res, next)
+);
 
 // Anomali geçmişi
-router.get("/history/:user_id", AnomalyController.getAnomalyHistory);
+router.get("/history/:user_id", (req, res, next) =>
+  AnomalyController.getAnomalyHistory(req, res, next)
+);
 
 export default router;
