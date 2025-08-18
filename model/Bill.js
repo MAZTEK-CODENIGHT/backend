@@ -173,17 +173,17 @@ billSchema.methods.calculateSavings = function (scenarios) {
 
 // Static methods
 billSchema.statics.findByUserAndPeriod = function (userId, period) {
-  const startDate = new Date(period + "-01");
-  const endDate = new Date(
-    startDate.getFullYear(),
-    startDate.getMonth() + 1,
-    0
-  );
+  // period: "2025-07" string'ini tarih aralığına çevir
+  const [year, month] = period.split("-");
+  const startDate = new Date(parseInt(year), parseInt(month) - 1, 1); // month 0-indexed
+  const endDate = new Date(parseInt(year), parseInt(month), 1); // next month start
 
   return this.findOne({
-    user_id: userId,
-    period_start: { $gte: startDate },
-    period_end: { $lte: endDate },
+    user_id: parseInt(userId),
+    period_start: {
+      $gte: startDate,
+      $lt: endDate,
+    },
   });
 };
 
