@@ -10,22 +10,22 @@ const router = express.Router();
 
 // Tüm kullanıcıları listele
 // GET /api/users?type=postpaid&limit=50
-router.get("/", UserController.getAllUsers);
+router.get("/", (req, res, next) => UserController.getAllUsers(req, res, next));
 
 // Kullanıcı istatistikleri
 // GET /api/users/stats
-router.get("/stats", UserController.getUserStats);
+router.get("/stats", (req, res, next) => UserController.getUserStats(req, res, next));
 
 // MSISDN ile kullanıcı getir
 // GET /api/users/by-msisdn/:msisdn
-router.get("/by-msisdn/:msisdn", UserController.getUserByMsisdn);
+router.get("/by-msisdn/:msisdn", (req, res, next) => UserController.getUserByMsisdn(req, res, next));
 
 // User ID ile kullanıcı detaylarını getir
 // GET /api/users/:userId
-router.get("/:userId", UserController.getUserById);
+router.get("/:userId", (req, res, next) => UserController.getUserById(req, res, next));
 
 // Kullanıcı profil özeti
 // GET /api/users/:userId/profile
-router.get("/:userId/profile", UserController.getUserProfile);
+router.get("/:userId/profile", (req, res, next) => UserController.getUserProfile(req, res, next));
 
 export default router;
