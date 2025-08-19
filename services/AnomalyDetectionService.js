@@ -95,6 +95,12 @@ class AnomalyDetectionService {
       "premium_sms",
       "vas",
       "roaming",
+      "monthly_fee",
+      "data_overage",
+      "voice_overage",
+      "plan",
+      "one_off",
+      "discount",
     ];
 
     for (const category of categories) {

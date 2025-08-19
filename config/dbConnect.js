@@ -39,7 +39,6 @@ export const dbConnect = async () => {
           const count = await mongoose.connection.db
             .collection(collection.name)
             .countDocuments();
-          console.log(`   📋 ${collection.name}: ${count} documents`);
         } catch (err) {
           console.log(`   📋 ${collection.name}: count error`);
         }
