@@ -32,11 +32,6 @@ export const dbConnect = async () => {
       .listCollections()
       .toArray();
 
-    console.log(
-      `📊 Collections found (${collections.length}):`,
-      collections.map((c) => c.name).join(", ") || "None"
-    );
-
     // Collection sayılarını kontrol et
     if (collections.length > 0) {
       for (const collection of collections) {
