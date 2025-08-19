@@ -114,7 +114,10 @@ class AnomalyDetectionService {
           historicalAmounts
         );
 
-        // Z-score anomalisi
+        // Sadece bir anomali tipi ekle - önceliği Z-score'a ver
+        let anomalyDetected = false;
+
+        // Z-score anomalisi (daha güvenilir)
         if (Math.abs(analysis.zScore) > this.zScoreThreshold) {
           anomalies.push({
             type: "statistical",
@@ -137,10 +140,10 @@ class AnomalyDetectionService {
             ),
             first_occurrence: false,
           });
+          anomalyDetected = true;
         }
-
-        // Yüzde değişim anomalisi
-        if (analysis.percentageChange > threshold * 100) {
+        // Sadece Z-score anomalisi yoksa yüzde değişim kontrolü yap
+        else if (analysis.percentageChange > threshold * 100) {
           anomalies.push({
             type: "percentage_increase",
             category,
