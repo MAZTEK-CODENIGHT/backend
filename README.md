@@ -4,6 +4,8 @@
 **Platform:** Node.js + Express + MongoDB  
 **Deployment:** Local Development (localhost:2020)
 
+> **🚀 Tamamlanmış Versiyon:** Bu projenin bitirilmiş versiyonu [feat branch'inde](https://github.com/MAZTEK-CODENIGHT/backend/tree/feat) bulunmaktadır. **Bu versiyon [Muhammet Aydın](https://github.com/muhammetaydinn) tarafından geliştirilmiştir.**
+
 > **Şeffaf Fatura Açıklayıcı, Anomali Avcısı ve What-If Simülatörü**
 
 ## 📋 Proje Özeti
@@ -306,7 +308,7 @@ const detectAnomalies = (current, historical) => {
 
   return {
     isAnomaly: zScore > 2 || percentageChange > 80,
-    severity: percentageChange > 150 ? "high" : "medium",
+    severity: percentageChange > 150 ? 'high' : 'medium',
     delta: `+${percentageChange.toFixed(0)}%`,
   };
 };
@@ -344,7 +346,7 @@ const calculateWhatIf = (usage, newPlan, addons, options) => {
 ### 3. Fatura Açıklama Sistemi
 
 ```javascript
-const explainBill = (billItems) => {
+const explainBill = billItems => {
   // Kategori bazlı gruplama
   const breakdown = billItems.reduce((acc, item) => {
     acc[item.category] = acc[item.category] || { total: 0, lines: [] };
