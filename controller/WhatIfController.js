@@ -13,10 +13,29 @@ class WhatIfController {
    */
   async calculateWhatIf(req, res, next) {
     try {
+      console.log('🔍 WhatIfController - Request body:', req.body);
+      console.log('🔍 WhatIfController - Request headers:', req.headers);
+
       const { user_id, period, scenario } = req.body;
+
+      console.log('🔍 WhatIfController - Extracted values:', {
+        user_id,
+        period,
+        scenario,
+      });
+      console.log('🔍 WhatIfController - Scenario type:', typeof scenario);
+      console.log(
+        '🔍 WhatIfController - Scenario keys:',
+        scenario ? Object.keys(scenario) : 'undefined',
+      );
 
       // Validasyon
       if (!user_id || !period || !scenario) {
+        console.log('❌ WhatIfController - Validation failed:', {
+          user_id,
+          period,
+          scenario,
+        });
         return res.status(400).json({
           success: false,
           error: {
@@ -70,18 +89,22 @@ class WhatIfController {
 
       // PRD'deki response formatına göre düzenle
       const response = {
-        current_total: result.current_total,
-        new_total: result.new_total,
-        saving: result.saving,
-        saving_percent: result.saving_percent,
-        details: result.details,
-        scenario_summary: result.scenario_summary,
-        effective_date: result.effective_date,
-        recommendations: result.recommendations || [],
-        breakdown: result.breakdown || {},
-        risk_factors: result.risk_factors || [],
+        success: true,
+        data: {
+          current_total: result.current_total,
+          new_total: result.new_total,
+          saving: result.saving,
+          saving_percent: result.saving_percent,
+          details: result.details,
+          scenario_summary: result.scenario_summary,
+          effective_date: result.effective_date,
+          recommendations: result.recommendations || [],
+          breakdown: result.breakdown || {},
+          risk_factors: result.risk_factors || [],
+        },
       };
 
+      console.log('✅ WhatIfController - Sending response:', response);
       res.status(200).json(response);
     } catch (error) {
       if (error.message.includes("bulunamadı")) {

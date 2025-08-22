@@ -114,6 +114,37 @@ class BillService {
   }
 
   /**
+   * Kullanıcının mevcut dönemlerini getirir
+   * @param {number} userId - Kullanıcı ID
+   * @returns {Promise<Array>} Mevcut dönemler listesi
+   */
+  async getAvailablePeriods(userId) {
+    try {
+      const bills = await Bill.findAvailablePeriods(userId);
+
+      if (!bills || bills.length === 0) {
+        return [];
+      }
+
+      // Dönemleri formatla ve sırala (en yeni önce)
+      const periods = bills
+        .map(bill => ({
+          period: this.formatPeriod(bill.period_start),
+          period_start: bill.period_start,
+          period_end: bill.period_end,
+          issue_date: bill.issue_date,
+          total_amount: bill.total_amount,
+          bill_id: bill.bill_id,
+        }))
+        .sort((a, b) => new Date(b.period_start) - new Date(a.period_start));
+
+      return periods;
+    } catch (error) {
+      throw new Error(`Mevcut dönemler getirme hatası: ${error.message}`);
+    }
+  }
+
+  /**
    * Faturadaki kategori bazında dağılımı hesaplar
    * @param {Object} bill - Fatura objesi
    * @returns {Object} Kategori bazında dağılım

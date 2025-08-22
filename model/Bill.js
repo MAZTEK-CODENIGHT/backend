@@ -206,4 +206,10 @@ billSchema.statics.findByBillId = function (billId) {
   return this.findOne({ bill_id: billId });
 };
 
+billSchema.statics.findAvailablePeriods = function (userId) {
+  return this.find({ user_id: userId })
+    .select('period_start period_end issue_date total_amount bill_id')
+    .sort({ period_start: -1 });
+};
+
 export default mongoose.model("Bill", billSchema);

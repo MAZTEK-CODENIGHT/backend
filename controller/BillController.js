@@ -173,6 +173,42 @@ class BillController {
     }
   }
 
+  /**
+   * Kullanıcının mevcut dönemlerini getirir
+   * GET /api/bills/:userId/available-periods
+   */
+  async getAvailablePeriods(req, res, next) {
+    try {
+      const { userId } = req.params;
+
+      // Validasyon
+      if (!userId || isNaN(userId)) {
+        return res.status(400).json({
+          success: false,
+          error: {
+            code: 'INVALID_USER_ID',
+            message: 'Geçerli bir kullanıcı ID gereklidir',
+          },
+        });
+      }
+
+      const availablePeriods = await BillService.getAvailablePeriods(
+        parseInt(userId),
+      );
+
+      res.status(200).json({
+        success: true,
+        data: {
+          user_id: parseInt(userId),
+          available_periods: availablePeriods,
+          total_periods: availablePeriods.length,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // Yardımcı metodlar
 
   /**

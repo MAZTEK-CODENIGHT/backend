@@ -16,8 +16,14 @@ router.get("/:userId", (req, res, next) =>
 
 // Kullanıcının fatura geçmişini getir
 // GET /api/bills/:userId/history?months=6
-router.get("/:userId/history", (req, res, next) =>
-  BillController.getBillHistory(req, res, next)
+router.get('/:userId/history', (req, res, next) =>
+  BillController.getBillHistory(req, res, next),
+);
+
+// Kullanıcının mevcut dönemlerini getir
+// GET /api/bills/:userId/available-periods
+router.get('/:userId/available-periods', (req, res, next) =>
+  BillController.getAvailablePeriods(req, res, next),
 );
 
 // Bill ID ile fatura detayını getir
